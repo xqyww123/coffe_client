@@ -89,11 +89,12 @@ bool config_b(char* name, bool defaul)
 
 void help(int argc, char *argv[])
 {
-	int hf = open("README.md", O_RDONLY);
-	struct stat buf;
-	fstat(hf, &buf);
-	assert(-1 != sendfile(0, hf, NULL, buf.st_size));
-	close(hf);
+	FILE *a = fopen("README.md", "r");
+	int n;
+	while ((n = fgetc(a)) != EOF) {
+		  putchar(n);
+	}
+	fclose(a);
 }
 ACTION help_act = help;
 
